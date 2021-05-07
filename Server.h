@@ -23,7 +23,6 @@ class Server {
     asio::ip::tcp::acceptor tcpAcceptor;
     asio::ssl::context sslContext;
     SessionManager sessionManager;
-    int startedCount;
     void doAccept();
 };
 

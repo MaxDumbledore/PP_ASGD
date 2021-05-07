@@ -7,6 +7,7 @@
 
 #include <asio.hpp>
 #include <asio/ssl.hpp>
+#include <seal/seal.h>
 
 class SessionManager;
 
@@ -33,6 +34,8 @@ class Session : public std::enable_shared_from_this<Session> {
     void sendIdAndInitialParams();
 
     void receiveUpdate();
+
+    void asyncUpdate(std::vector<seal::Ciphertext> &&ciphers);
     
     void sendParams();
 

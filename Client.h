@@ -7,8 +7,9 @@
 
 #include <asio.hpp>
 #include <asio/ssl.hpp>
+#include <seal/seal.h>
 #include "Model.h"
-#include "Params.h"
+#include "ParamsFormatter.h"
 
 class Client {
    public:
@@ -27,13 +28,28 @@ class Client {
     TrainLoader trainLoader;
     std::pair<int, torch::data::Iterator<Batch>> iter;
     Model model;
-    Params builder;
+    ParamsFormatter formatter;
     std::vector<at::Tensor> lastParams;
 
     asio::ssl::context sslContext;
     std::unique_ptr<asio::ssl::stream<asio::ip::tcp::socket>> socket;
     std::string buf;
     std::vector<std::vector<int64_t>> dims;
+
+    seal::EncryptionParameters ckksParams;
+    std::unique_ptr<seal::SEALContext> context;
+    std::unique_ptr<seal::Decryptor> decryptor;
+    std::unique_ptr<seal::Encryptor> encryptor;
+    seal::PublicKey pubKey;
+    seal::SecretKey secKey;
+    seal::Plaintext plain;
+    seal::Ciphertext cipher;
+    std::unique_ptr<seal::CKKSEncoder> encoder;
+    std::vector<double> result;
+
+    std::vector<float> convertCipherToFloatVec(std::string &&s);
+
+    std::string convertFloatVecToCipher(std::vector<float> &&t);
 
     bool makeTrainLoader();
 

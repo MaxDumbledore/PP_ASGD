@@ -1,7 +1,3 @@
-//
-// Created by max on 2021/4/23.
-//
-
 #include "Client.h"
 #include "Constants.h"
 #include "Utils.h"
@@ -12,9 +8,10 @@ Client::Client(const Dataset& trainSet, asio::io_context& ioContext)
       id(-1),
       sslContext(asio::ssl::context::sslv23),
       iter(-1, nullptr) {
-    builder.setData(model.getNoGradParams());
+    formatter.setData(model.getNoGradParams());
     for (auto& i : model.getNoGradParams())
         dims.emplace_back(i.sizes().vec());
+
     sslContext.use_certificate_chain_file(CERT_PATH + "client.pem");
     sslContext.use_private_key_file(CERT_PATH + "client.pem",
                                     asio::ssl::context::pem);
@@ -22,6 +19,44 @@ Client::Client(const Dataset& trainSet, asio::io_context& ioContext)
     socket = std::make_unique<asio::ssl::stream<asio::ip::tcp::socket>>(
         ioContext, sslContext);
     socket->set_verify_mode(asio::ssl::verify_peer);
+
+    auto ifs = std::ifstream(CKKS_PATH + "params.txt", std::ios::binary);
+    ckksParams.load(ifs);
+    context = std::make_unique<seal::SEALContext>(ckksParams);
+    ifs = std::ifstream(CKKS_PATH + "pubKey.txt", std::ios::binary);
+    pubKey.load(*context, ifs);
+    ifs = std::ifstream(CKKS_PATH + "secKey.txt", std::ios::binary);
+    secKey.load(*context, ifs);
+    encryptor = std::make_unique<seal::Encryptor>(*context, pubKey, secKey);
+    decryptor = std::make_unique<seal::Decryptor>(*context, secKey);
+    encoder = std::make_unique<seal::CKKSEncoder>(*context);
+}
+
+std::vector<float> Client::convertCipherToFloatVec(std::string&& s) {
+    std::stringstream ss(s);
+    std::vector<float> ans;
+    while (ss.rdbuf()->in_avail()) {
+        cipher.load(*context, ss);
+        decryptor->decrypt(cipher, plain);
+        encoder->decode(plain, result);
+        ans.reserve(ans.size() + result.size());
+        for (auto& i : result)
+            ans.emplace_back((float)i);
+    }
+    return ans;
+}
+
+std::string Client::convertFloatVecToCipher(std::vector<float>&& t) {
+    std::stringstream ss;
+    // std::clog<<std::max_element(t.begin(),t.end())<<std::endl;
+    for (int i = 0; i < t.size(); i += SLOTS) {
+        encoder->encode(
+            std::vector<double>(t.begin() + i,
+                                std::min(t.end(), t.begin() + i + SLOTS)),
+            SCALE, plain);
+        encryptor->encrypt_symmetric(plain).save(ss);
+    }
+    return ss.str();
 }
 
 bool Client::makeTrainLoader() {
@@ -112,20 +147,24 @@ bool Client::handshake() {
 
 bool Client::receiveIdAndInitialParams() {
     asio::error_code err;
-    buf.resize(4 + builder.size() * 4);
+    buf.resize(4 + formatter.size() * 4);
+    //   asio::read_until(*socket, asio::dynamic_buffer(buf), FIN_FLAG, err);
+
     asio::read(*socket, asio::buffer(buf), err);
     stepDebug(__func__, err);
     id = bytesToInt(buf.substr(0, 4));
     makeTrainLoader();
-    builder.setData(streamToFloatVec(buf, builder.size(), 4));
-    model.setParams(builder.getData(dims));
+    formatter.setData(streamToFloatVec(buf, formatter.size(), 4));
+    model.setParams(formatter.getData(dims));
     return !err.operator bool();
 }
 
 bool Client::sendUpdate() {
     asio::error_code err;
-    builder.setData(getCurrentUpdate());
-    buf = floatVecToStream(builder.getData()) + (finished() ? 'S' : 'C');
+    formatter.setData(getCurrentUpdate());
+    //std::clog<<"cur:"<<formatter.getData()[0]<<std::endl;
+    buf = convertFloatVecToCipher(formatter.getData()) +
+          (finished() ? 'S' : 'C') + FIN_FLAG;
     asio::write(*socket, asio::buffer(buf), err);
     stepDebug(__func__, err);
     return !err.operator bool();
@@ -133,10 +172,13 @@ bool Client::sendUpdate() {
 
 bool Client::receiveParams() {
     asio::error_code err;
-    buf.resize(builder.size() * 4);
-    asio::read(*socket, asio::buffer(buf), err);
+    buf.clear();
+    asio::read_until(*socket, asio::dynamic_buffer(buf), FIN_FLAG, err);
     stepDebug(__func__, err);
-    builder.setData(streamToFloatVec(buf, builder.size()));
-    model.setParams(builder.getData(dims));
+    formatter.setData(
+        convertCipherToFloatVec(buf.substr(0, buf.size() - FIN_FLAG.size())));
+    model.setParams(formatter.getData(dims));
+     //   std::clog<<"new:"<<model.getNoGradParams()[0][0][0]<<std::endl;
+
     return !err.operator bool();
 }

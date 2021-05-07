@@ -36,8 +36,14 @@ int main(int argc, char* argv[]) {
             auto endpoints = resolver.resolve(argv[2], argv[3]);
             auto client = new Client(trainSet, ioContext);
             client->connect(endpoints);
+
+            auto startTime = std::clock();
+
             client->start(&testSet);
             std::clog << "Final Correctness: " << client->test(testSet)
+                      << std::endl;
+            std::clog << "Used Time:"
+                      << (double)(std::clock() - startTime) / CLOCKS_PER_SEC
                       << std::endl;
         } else {
             if (argc != 3) {
@@ -45,7 +51,6 @@ int main(int argc, char* argv[]) {
                 return 1;
             }
             new Server(ioContext, std::stoi(argv[2]));
-            ioContext.run();
         }
     } catch (std::exception& e) {
         std::cerr << "Exception: " << e.what() << "\n";

@@ -5,9 +5,11 @@
 #ifndef ASGD_SESSIONMANAGER_H
 #define ASGD_SESSIONMANAGER_H
 
+#include <seal/seal.h>
 #include <set>
+#include "Aggregator.h"
 #include "Model.h"
-#include "Params.h"
+#include "ParamsFormatter.h"
 #include "Session.h"
 
 /**
@@ -20,21 +22,30 @@ class SessionManager {
    public:
     SessionManager();
 
-    Params& params();
-
     void insert(const SessionPtr& s);
 
     void startAll();
 
+    void finishAll();
+
     void stop(const SessionPtr& s);
 
-    void triggerFinish();
+    ParamsFormatter& getFormatter();
+
+    const seal::SEALContext& getContext() const;
+
+    seal::Evaluator& getEvaluator();
+
+    Aggregator& getAggregator();
 
    private:
     std::set<SessionPtr> sessions;
-    Params globalParams;
-    int finishedCount;
-    void allSendFinalParams();
+    ParamsFormatter formatter;
+    Aggregator aggregator;
+
+    seal::EncryptionParameters ckksParams;
+    std::unique_ptr<seal::SEALContext> context;
+    std::unique_ptr<seal::Evaluator> evaluator;
 };
 
 #endif  // ASGD_SESSIONMANAGER_H

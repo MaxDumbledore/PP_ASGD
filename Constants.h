@@ -16,5 +16,11 @@ extern const int EPOCHS;
 extern const double LEARNING_RATE;
 extern const double MOMENTUM;
 
+extern const size_t POLY_MODULUS_DEGREE;
+extern const size_t SLOTS;
+extern const double SCALE;
+extern const std::string CKKS_PATH;
+extern const std::string FIN_FLAG;
 
-#endif //ASGD_CONSTANTS_H
+
+#endif

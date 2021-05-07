@@ -22,4 +22,6 @@ std::vector<float> streamToFloatVec(const std::string& stream,
 
 std::string floatVecToStream(const std::vector<float>& v);
 
+
+
 #endif  // ASGD_UTILS_H
