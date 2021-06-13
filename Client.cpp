@@ -1,6 +1,7 @@
 #include "Client.h"
 #include "Constants.h"
 #include "Utils.h"
+#include <random>
 //#define DEBUG
 
 Client::Client(const Dataset& trainSet, asio::io_context& ioContext)
@@ -118,14 +119,30 @@ void Client::connect(
     stepDebug(__func__, err);
 }
 
+//#define RANDOM_DELAY
+
 void Client::start(Dataset* testSet) {
+    clock_t start = clock(), g = 0;
     if (handshake() && receiveIdAndInitialParams()) {
         int cnt = 0;
+        #ifdef RANDOM_DELAY
+        static std::random_device rd;
+        static std::mt19937 e(rd());
+        std::uniform_int_distribution<int> dist(0, 100);
+        std::this_thread::sleep_for(
+            std::chrono::milliseconds(dist(e)));  //休眠100毫秒
+#endif
         do {
-            if (++cnt % 100 == 0) {
+            if (++cnt % 50 == 0) {
                 std::clog << "------" << cnt << "------" << std::endl;
-                if (testSet)
+                if (testSet) {
+                    auto d = clock();
                     std::clog << "Correctness: " << test(*testSet) << std::endl;
+                    g += (clock() - d);
+                }
+                std::clog << "TimeCost: "
+                          << (double)(clock() - start - g) / CLOCKS_PER_SEC
+                          << std::endl;
             }
         } while (iterateOneBatch() && sendUpdate() && receiveParams());
     }
@@ -162,7 +179,7 @@ bool Client::receiveIdAndInitialParams() {
 bool Client::sendUpdate() {
     asio::error_code err;
     formatter.setData(getCurrentUpdate());
-    //std::clog<<"cur:"<<formatter.getData()[0]<<std::endl;
+    // std::clog<<"cur:"<<formatter.getData()[0]<<std::endl;
     buf = convertFloatVecToCipher(formatter.getData()) +
           (finished() ? 'S' : 'C') + FIN_FLAG;
     asio::write(*socket, asio::buffer(buf), err);
@@ -178,7 +195,7 @@ bool Client::receiveParams() {
     formatter.setData(
         convertCipherToFloatVec(buf.substr(0, buf.size() - FIN_FLAG.size())));
     model.setParams(formatter.getData(dims));
-     //   std::clog<<"new:"<<model.getNoGradParams()[0][0][0]<<std::endl;
+    //   std::clog<<"new:"<<model.getNoGradParams()[0][0][0]<<std::endl;
 
     return !err.operator bool();
 }

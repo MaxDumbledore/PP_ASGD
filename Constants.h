@@ -19,6 +19,7 @@ extern const double MOMENTUM;
 extern const size_t POLY_MODULUS_DEGREE;
 extern const size_t SLOTS;
 extern const double SCALE;
+extern const int SCALE_P;
 extern const std::string CKKS_PATH;
 extern const std::string FIN_FLAG;
 

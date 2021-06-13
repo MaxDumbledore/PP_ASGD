@@ -12,7 +12,7 @@
 
 # =============================================================================
 # Project: ASGD
-# Configuration: Debug
+# Configuration: Release
 # =============================================================================
 
 #############################################
@@ -63,77 +63,77 @@ build cmake_object_order_depends_target_ASGD: phony || CMakeFiles/ASGD.dir
 
 build CMakeFiles/ASGD.dir/main.cpp.o: CXX_COMPILER__ASGD ../main.cpp || cmake_object_order_depends_target_ASGD
   DEP_FILE = CMakeFiles/ASGD.dir/main.cpp.o.d
-  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0 -g   -D_GLIBCXX_USE_CXX11_ABI=0 -pthread -std=gnu++17
+  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=1 -O3 -DNDEBUG   -D_GLIBCXX_USE_CXX11_ABI=1 -pthread -std=gnu++17
   INCLUDES = -I/home/max/asio-1.18.1/include -isystem /home/max/libtorch/include -isystem /home/max/libtorch/include/torch/csrc/api/include -isystem /home/max/SEAL/native/src -isystem /home/max/SEAL/build/native/src -isystem /home/max/SEAL/thirdparty/msgsl-src/include
   OBJECT_DIR = CMakeFiles/ASGD.dir
   OBJECT_FILE_DIR = CMakeFiles/ASGD.dir
 
 build CMakeFiles/ASGD.dir/Constants.cpp.o: CXX_COMPILER__ASGD ../Constants.cpp || cmake_object_order_depends_target_ASGD
   DEP_FILE = CMakeFiles/ASGD.dir/Constants.cpp.o.d
-  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0 -g   -D_GLIBCXX_USE_CXX11_ABI=0 -pthread -std=gnu++17
+  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=1 -O3 -DNDEBUG   -D_GLIBCXX_USE_CXX11_ABI=1 -pthread -std=gnu++17
   INCLUDES = -I/home/max/asio-1.18.1/include -isystem /home/max/libtorch/include -isystem /home/max/libtorch/include/torch/csrc/api/include -isystem /home/max/SEAL/native/src -isystem /home/max/SEAL/build/native/src -isystem /home/max/SEAL/thirdparty/msgsl-src/include
   OBJECT_DIR = CMakeFiles/ASGD.dir
   OBJECT_FILE_DIR = CMakeFiles/ASGD.dir
 
 build CMakeFiles/ASGD.dir/MnistCNN.cpp.o: CXX_COMPILER__ASGD ../MnistCNN.cpp || cmake_object_order_depends_target_ASGD
   DEP_FILE = CMakeFiles/ASGD.dir/MnistCNN.cpp.o.d
-  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0 -g   -D_GLIBCXX_USE_CXX11_ABI=0 -pthread -std=gnu++17
+  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=1 -O3 -DNDEBUG   -D_GLIBCXX_USE_CXX11_ABI=1 -pthread -std=gnu++17
   INCLUDES = -I/home/max/asio-1.18.1/include -isystem /home/max/libtorch/include -isystem /home/max/libtorch/include/torch/csrc/api/include -isystem /home/max/SEAL/native/src -isystem /home/max/SEAL/build/native/src -isystem /home/max/SEAL/thirdparty/msgsl-src/include
   OBJECT_DIR = CMakeFiles/ASGD.dir
   OBJECT_FILE_DIR = CMakeFiles/ASGD.dir
 
 build CMakeFiles/ASGD.dir/Model.cpp.o: CXX_COMPILER__ASGD ../Model.cpp || cmake_object_order_depends_target_ASGD
   DEP_FILE = CMakeFiles/ASGD.dir/Model.cpp.o.d
-  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0 -g   -D_GLIBCXX_USE_CXX11_ABI=0 -pthread -std=gnu++17
+  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=1 -O3 -DNDEBUG   -D_GLIBCXX_USE_CXX11_ABI=1 -pthread -std=gnu++17
   INCLUDES = -I/home/max/asio-1.18.1/include -isystem /home/max/libtorch/include -isystem /home/max/libtorch/include/torch/csrc/api/include -isystem /home/max/SEAL/native/src -isystem /home/max/SEAL/build/native/src -isystem /home/max/SEAL/thirdparty/msgsl-src/include
   OBJECT_DIR = CMakeFiles/ASGD.dir
   OBJECT_FILE_DIR = CMakeFiles/ASGD.dir
 
 build CMakeFiles/ASGD.dir/Server.cpp.o: CXX_COMPILER__ASGD ../Server.cpp || cmake_object_order_depends_target_ASGD
   DEP_FILE = CMakeFiles/ASGD.dir/Server.cpp.o.d
-  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0 -g   -D_GLIBCXX_USE_CXX11_ABI=0 -pthread -std=gnu++17
+  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=1 -O3 -DNDEBUG   -D_GLIBCXX_USE_CXX11_ABI=1 -pthread -std=gnu++17
   INCLUDES = -I/home/max/asio-1.18.1/include -isystem /home/max/libtorch/include -isystem /home/max/libtorch/include/torch/csrc/api/include -isystem /home/max/SEAL/native/src -isystem /home/max/SEAL/build/native/src -isystem /home/max/SEAL/thirdparty/msgsl-src/include
   OBJECT_DIR = CMakeFiles/ASGD.dir
   OBJECT_FILE_DIR = CMakeFiles/ASGD.dir
 
 build CMakeFiles/ASGD.dir/Client.cpp.o: CXX_COMPILER__ASGD ../Client.cpp || cmake_object_order_depends_target_ASGD
   DEP_FILE = CMakeFiles/ASGD.dir/Client.cpp.o.d
-  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0 -g   -D_GLIBCXX_USE_CXX11_ABI=0 -pthread -std=gnu++17
+  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=1 -O3 -DNDEBUG   -D_GLIBCXX_USE_CXX11_ABI=1 -pthread -std=gnu++17
   INCLUDES = -I/home/max/asio-1.18.1/include -isystem /home/max/libtorch/include -isystem /home/max/libtorch/include/torch/csrc/api/include -isystem /home/max/SEAL/native/src -isystem /home/max/SEAL/build/native/src -isystem /home/max/SEAL/thirdparty/msgsl-src/include
   OBJECT_DIR = CMakeFiles/ASGD.dir
   OBJECT_FILE_DIR = CMakeFiles/ASGD.dir
 
 build CMakeFiles/ASGD.dir/SessionManager.cpp.o: CXX_COMPILER__ASGD ../SessionManager.cpp || cmake_object_order_depends_target_ASGD
   DEP_FILE = CMakeFiles/ASGD.dir/SessionManager.cpp.o.d
-  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0 -g   -D_GLIBCXX_USE_CXX11_ABI=0 -pthread -std=gnu++17
+  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=1 -O3 -DNDEBUG   -D_GLIBCXX_USE_CXX11_ABI=1 -pthread -std=gnu++17
   INCLUDES = -I/home/max/asio-1.18.1/include -isystem /home/max/libtorch/include -isystem /home/max/libtorch/include/torch/csrc/api/include -isystem /home/max/SEAL/native/src -isystem /home/max/SEAL/build/native/src -isystem /home/max/SEAL/thirdparty/msgsl-src/include
   OBJECT_DIR = CMakeFiles/ASGD.dir
   OBJECT_FILE_DIR = CMakeFiles/ASGD.dir
 
 build CMakeFiles/ASGD.dir/Session.cpp.o: CXX_COMPILER__ASGD ../Session.cpp || cmake_object_order_depends_target_ASGD
   DEP_FILE = CMakeFiles/ASGD.dir/Session.cpp.o.d
-  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0 -g   -D_GLIBCXX_USE_CXX11_ABI=0 -pthread -std=gnu++17
+  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=1 -O3 -DNDEBUG   -D_GLIBCXX_USE_CXX11_ABI=1 -pthread -std=gnu++17
   INCLUDES = -I/home/max/asio-1.18.1/include -isystem /home/max/libtorch/include -isystem /home/max/libtorch/include/torch/csrc/api/include -isystem /home/max/SEAL/native/src -isystem /home/max/SEAL/build/native/src -isystem /home/max/SEAL/thirdparty/msgsl-src/include
   OBJECT_DIR = CMakeFiles/ASGD.dir
   OBJECT_FILE_DIR = CMakeFiles/ASGD.dir
 
 build CMakeFiles/ASGD.dir/Utils.cpp.o: CXX_COMPILER__ASGD ../Utils.cpp || cmake_object_order_depends_target_ASGD
   DEP_FILE = CMakeFiles/ASGD.dir/Utils.cpp.o.d
-  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0 -g   -D_GLIBCXX_USE_CXX11_ABI=0 -pthread -std=gnu++17
+  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=1 -O3 -DNDEBUG   -D_GLIBCXX_USE_CXX11_ABI=1 -pthread -std=gnu++17
   INCLUDES = -I/home/max/asio-1.18.1/include -isystem /home/max/libtorch/include -isystem /home/max/libtorch/include/torch/csrc/api/include -isystem /home/max/SEAL/native/src -isystem /home/max/SEAL/build/native/src -isystem /home/max/SEAL/thirdparty/msgsl-src/include
   OBJECT_DIR = CMakeFiles/ASGD.dir
   OBJECT_FILE_DIR = CMakeFiles/ASGD.dir
 
 build CMakeFiles/ASGD.dir/ParamsFormatter.cpp.o: CXX_COMPILER__ASGD ../ParamsFormatter.cpp || cmake_object_order_depends_target_ASGD
   DEP_FILE = CMakeFiles/ASGD.dir/ParamsFormatter.cpp.o.d
-  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0 -g   -D_GLIBCXX_USE_CXX11_ABI=0 -pthread -std=gnu++17
+  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=1 -O3 -DNDEBUG   -D_GLIBCXX_USE_CXX11_ABI=1 -pthread -std=gnu++17
   INCLUDES = -I/home/max/asio-1.18.1/include -isystem /home/max/libtorch/include -isystem /home/max/libtorch/include/torch/csrc/api/include -isystem /home/max/SEAL/native/src -isystem /home/max/SEAL/build/native/src -isystem /home/max/SEAL/thirdparty/msgsl-src/include
   OBJECT_DIR = CMakeFiles/ASGD.dir
   OBJECT_FILE_DIR = CMakeFiles/ASGD.dir
 
 build CMakeFiles/ASGD.dir/Aggregator.cpp.o: CXX_COMPILER__ASGD ../Aggregator.cpp || cmake_object_order_depends_target_ASGD
   DEP_FILE = CMakeFiles/ASGD.dir/Aggregator.cpp.o.d
-  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0 -g   -D_GLIBCXX_USE_CXX11_ABI=0 -pthread -std=gnu++17
+  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=1 -O3 -DNDEBUG   -D_GLIBCXX_USE_CXX11_ABI=1 -pthread -std=gnu++17
   INCLUDES = -I/home/max/asio-1.18.1/include -isystem /home/max/libtorch/include -isystem /home/max/libtorch/include/torch/csrc/api/include -isystem /home/max/SEAL/native/src -isystem /home/max/SEAL/build/native/src -isystem /home/max/SEAL/thirdparty/msgsl-src/include
   OBJECT_DIR = CMakeFiles/ASGD.dir
   OBJECT_FILE_DIR = CMakeFiles/ASGD.dir
@@ -147,7 +147,7 @@ build CMakeFiles/ASGD.dir/Aggregator.cpp.o: CXX_COMPILER__ASGD ../Aggregator.cpp
 # Link the executable ASGD
 
 build ASGD: CXX_EXECUTABLE_LINKER__ASGD CMakeFiles/ASGD.dir/main.cpp.o CMakeFiles/ASGD.dir/Constants.cpp.o CMakeFiles/ASGD.dir/MnistCNN.cpp.o CMakeFiles/ASGD.dir/Model.cpp.o CMakeFiles/ASGD.dir/Server.cpp.o CMakeFiles/ASGD.dir/Client.cpp.o CMakeFiles/ASGD.dir/SessionManager.cpp.o CMakeFiles/ASGD.dir/Session.cpp.o CMakeFiles/ASGD.dir/Utils.cpp.o CMakeFiles/ASGD.dir/ParamsFormatter.cpp.o CMakeFiles/ASGD.dir/Aggregator.cpp.o | /home/max/libtorch/lib/libtorch.so /home/max/libtorch/lib/libc10.so /usr/lib/x86_64-linux-gnu/libssl.so /home/max/SEAL/build/lib/libseal-3.6.a /home/max/libtorch/lib/libc10.so /usr/lib/x86_64-linux-gnu/libcrypto.so
-  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=0 -g
+  FLAGS = -D_GLIBCXX_USE_CXX11_ABI=1 -O3 -DNDEBUG
   LINK_LIBRARIES = -Wl,-rpath,/home/max/libtorch/lib  /home/max/libtorch/lib/libtorch.so  /home/max/libtorch/lib/libc10.so  /usr/lib/x86_64-linux-gnu/libssl.so  /home/max/SEAL/build/lib/libseal-3.6.a  -Wl,--no-as-needed,"/home/max/libtorch/lib/libtorch_cpu.so" -Wl,--as-needed  /home/max/libtorch/lib/libc10.so  -Wl,--no-as-needed,"/home/max/libtorch/lib/libtorch.so" -Wl,--as-needed  /usr/lib/x86_64-linux-gnu/libcrypto.so  -pthread
   OBJECT_DIR = CMakeFiles/ASGD.dir
   POST_BUILD = :
